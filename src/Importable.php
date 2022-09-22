@@ -86,6 +86,26 @@ trait Importable
         return new SheetCollection($collections);
     }
 
+    public function get_header_row($path, callable $callback = null)
+    {
+        $reader = $this->reader($path);
+        $row = [];
+        foreach ($reader->getSheetIterator() as $key => $sheet) {
+            if ($this->sheet_number != $key) {
+                continue;
+            }
+            //
+           
+            foreach ($sheet->getRowIterator() as $k => $rowAsObject) {
+                $row = $rowAsObject->toArray();
+                break;
+            }
+        }
+        $reader->close();
+
+        return collect($row ?? []);
+    }
+
     /**
      * @param $path
      *

@@ -218,4 +218,5 @@ class FastExcel
         $this->use_custom_headers = true;
         return $this;
     }
+
 }
