@@ -22,6 +22,7 @@ trait Importable
      */
     private $sheet_number = 1;
     private $custom_headers = [];
+    private $more_values = [];
     private $use_custom_headers = false;
 
     /**
@@ -144,6 +145,7 @@ trait Importable
 
         foreach ($sheet->getRowIterator() as $k => $rowAsObject) {
             $row = $rowAsObject->toArray();
+            $row = array_merge($row, $this->more_values);
             if ($k >= $this->start_row) {
                 if ($this->with_header) {
                     if ($k == $this->start_row) {

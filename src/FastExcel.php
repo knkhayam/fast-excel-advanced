@@ -210,9 +210,11 @@ class FastExcel
         }
     }
 
-    public function setCustomHeaders($headers)
+    ///
+    public function setCustomHeaders($headers, $more_values = [])
     {
         $this->custom_headers = $headers;
+        $this->more_values = $more_values;
         $this->use_custom_headers = true;
         return $this;
     }
