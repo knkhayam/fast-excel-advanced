@@ -213,6 +213,7 @@ class FastExcel
     public function setCustomHeaders($headers)
     {
         $this->custom_headers = $headers;
+        $this->use_custom_headers = true;
         return $this;
     }
 }
