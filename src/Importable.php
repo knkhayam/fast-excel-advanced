@@ -21,6 +21,8 @@ trait Importable
      * @var int
      */
     private $sheet_number = 1;
+    private $custom_headers = [];
+    private $use_custom_headers = false;
 
     /**
      * @param \OpenSpout\Reader\ReaderInterface|\OpenSpout\Writer\WriterInterface $reader_or_writer
@@ -28,6 +30,8 @@ trait Importable
      * @return mixed
      */
     abstract protected function setOptions(&$reader_or_writer);
+
+    abstract public function setCustomHeaders($headers);
 
     /**
      * @param string        $path
@@ -143,7 +147,11 @@ trait Importable
             if ($k >= $this->start_row) {
                 if ($this->with_header) {
                     if ($k == $this->start_row) {
-                        $headers = $this->toStrings($row);
+                        if($this->use_custom_headers)
+                            $headers = $this->custom_headers;
+                        else
+                            $headers = $this->toStrings($row);
+                        
                         $count_header = count($headers);
                         continue;
                     }

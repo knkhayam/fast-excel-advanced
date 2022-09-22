@@ -209,4 +209,10 @@ class FastExcel
             );
         }
     }
+
+    public function setCustomHeaders($headers)
+    {
+        $this->custom_headers = $headers;
+        return $this;
+    }
 }
